@@ -1,0 +1,51 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n = matrix.length;  // row size
+        int m = matrix[0].length;  // column size
+        boolean firstRowZero = false;
+        boolean firstColZero = false;
+
+        for(int i = 0; i < m; i++){  // Checking first Row Zero
+            if(matrix[0][i] == 0){
+                firstRowZero = true;
+                break;
+            }
+        }
+
+        for(int i = 0; i < n; i++){  // Checking first Row Zero
+            if(matrix[i][0] == 0){
+                firstColZero = true;
+                break;
+            }
+        }
+
+        for(int i = 1; i < n; i++){  // Using first row and column as markers to set
+            for(int j = 1; j < m; j++){
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+
+        for(int i = 1; i < n; i++){  // Updating the entire matrix to zero based on markers  
+            for(int j = 1; j < m; j++){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        if(firstRowZero){  // Marking the first row as zero if needed
+            for(int i = 0; i < m; i++){
+                matrix[0][i] = 0;
+            }
+        }
+
+        if(firstColZero){  // Marking the first column as zero if needed
+            for(int i = 0; i < n; i++){
+                matrix[i][0] = 0;
+            }
+        }
+    }
+}
